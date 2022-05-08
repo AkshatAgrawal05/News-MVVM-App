@@ -4,6 +4,10 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/Akshat/AndroidStudioProjects/NewsApp/app/src/main/res/layout/activity_main.xml" value="0.21739130434782608" />
+        <entry key="..\:/Users/Akshat/AndroidStudioProjects/NewsApp/app/src/main/res/layout/fragment_news_details.xml" value="0.20625" />
+        <entry key="..\:/Users/Akshat/AndroidStudioProjects/NewsApp/app/src/main/res/layout/fragment_news_list.xml" value="0.21739130434782608" />
+        <entry key="..\:/Users/Akshat/AndroidStudioProjects/NewsApp/app/src/main/res/layout/fragment_news_saved.xml" value="0.20625" />
+        <entry key="..\:/Users/Akshat/AndroidStudioProjects/NewsApp/app/src/main/res/menu/bottom_nav_menu.xml" value="0.2234375" />
       </map>
     </option>
   </component>
