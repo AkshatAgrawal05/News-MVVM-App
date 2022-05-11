@@ -8,13 +8,13 @@ plugins {
 }
 
 android {
-    compileSdkVersion 30
+    compileSdkVersion 31
     buildToolsVersion "30.0.3"
 
     defaultConfig {
         applicationId "com.repos.newsapp"
         minSdkVersion 23
-        targetSdkVersion 30
+        targetSdkVersion 31
         versionCode 1
         versionName "1.0"
 
@@ -33,6 +33,10 @@ android {
     }
     kotlinOptions {
         jvmTarget = '1.8'
+    }
+
+    buildFeatures {
+        dataBinding true
     }
 }
 
@@ -61,8 +65,6 @@ dependencies {
     implementation "com.google.dagger:hilt-android:$hiltVersion"
     annotationProcessor 'androidx.room:room-compiler:2.2.5'
     kapt "com.google.dagger:hilt-android-compiler:$hiltVersion"
-    implementation "androidx.hilt:hilt-lifecycle-viewmodel:$hiltAndroidXVersion"
-    kapt "androidx.hilt:hilt-compiler:$hiltAndroidXVersion"
 
 
     // Retrofit + GSON
@@ -82,5 +84,5 @@ dependencies {
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutineVersion"
 
     //GlideToVector
-    implementation "com.github.corouteam:GlideToVectorYou:v$glideVersion"
+//    implementation "com.github.corouteam:GlideToVectorYou:$glideVersion"
 }

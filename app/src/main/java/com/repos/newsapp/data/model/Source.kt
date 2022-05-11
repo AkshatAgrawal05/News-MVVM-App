@@ -7,9 +7,9 @@ import kotlinx.android.parcel.Parcelize
 @Parcelize
 data class Source(
 
-    @field:SerializedName("name")
-    val name: String,
-
     @field:SerializedName("id")
-    val id: Int
+    val id: String,
+
+    @field:SerializedName("name")
+    val name: String
 ) : Parcelable
