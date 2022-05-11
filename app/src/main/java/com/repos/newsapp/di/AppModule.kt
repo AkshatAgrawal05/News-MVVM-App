@@ -7,7 +7,6 @@ import com.google.gson.GsonBuilder
 import com.repos.newsapp.data.local.NewsDao
 import com.repos.newsapp.data.local.NewsDatabase
 import com.repos.newsapp.data.remote.NewsService
-import com.repos.newsapp.data.repository.NewsRepositoryImpl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -44,8 +43,4 @@ object AppModule {
     @Provides
     @Singleton
     fun getNewsAppDao(db: NewsDatabase): NewsDao = db.getNewsDao()
-
-    @Provides
-    @Singleton
-    fun getRepository(dao: NewsDao, api: NewsService) = NewsRepositoryImpl(dao, api)
 }
