@@ -1,12 +1,12 @@
 package com.repos.newsapp.ui.newslistfragment
 
-import android.util.Log
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.repos.newsapp.data.model.NewsResponse
 import com.repos.newsapp.domain.repository.NewsRepository
 import com.repos.newsapp.util.Resources
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -14,13 +14,16 @@ import javax.inject.Inject
 class NewsListViewModel @Inject constructor(
     private val repository: NewsRepository
 ) : ViewModel() {
+
+    val articlesList: MutableLiveData<Resources<NewsResponse>> = MutableLiveData()
+    var newsPage = 1
+
     fun getNewsList() {
-        viewModelScope.launch(Dispatchers.IO) {
-            when (val res = repository.getTopHeadlineNews()) {
-                is Resources.Success -> Log.d("res", res.data.toString())
-                is Resources.Error -> Log.d("res", "${res.data.toString()} ${res.message}")
-                is Resources.Loading -> Log.d("res", res.isLoading.toString())
-            }
+        viewModelScope.launch {
+            articlesList.postValue(Resources.Loading(true))
+            val response = repository.getTopHeadlineNews(pageNum = newsPage)
+            articlesList.postValue(response)
+//            articlesList.postValue(Resources.Loading(false))
         }
     }
 }
