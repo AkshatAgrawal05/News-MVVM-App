@@ -6,7 +6,9 @@ import com.repos.newsapp.data.remote.NewsService
 import com.repos.newsapp.domain.repository.NewsRepository
 import com.repos.newsapp.util.Resources
 import javax.inject.Inject
+import javax.inject.Singleton
 
+@Singleton
 class NewsRepositoryImpl @Inject constructor(
     private val dao: NewsDao,
     private val api: NewsService
@@ -18,10 +20,11 @@ class NewsRepositoryImpl @Inject constructor(
     ): Resources<NewsResponse> {
         return try {
             val response = api.getTopNewsHeadline(pageSize = pageSize, pageNum = pageNum)
+            val body = response.body()
             if (response.isSuccessful) {
-                Resources.Success(data = response.body())
+                Resources.Success(data = body)
             } else {
-                Resources.Error(data = response.body(), message = "An Error Occurred!")
+                Resources.Error(data = body, message = response.message())
             }
         } catch (e: Exception) {
             Resources.Error(message = e.message)
