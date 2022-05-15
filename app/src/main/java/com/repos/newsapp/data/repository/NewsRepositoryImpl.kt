@@ -14,6 +14,8 @@ class NewsRepositoryImpl @Inject constructor(
     private val api: NewsService
 ) : NewsRepository {
 
+    var newsResponse: NewsResponse? = null
+
     override suspend fun getTopHeadlineNews(
         pageSize: Int?,
         pageNum: Int?
@@ -22,7 +24,16 @@ class NewsRepositoryImpl @Inject constructor(
             val response = api.getTopNewsHeadline(pageSize = pageSize, pageNum = pageNum)
             val body = response.body()
             if (response.isSuccessful) {
-                Resources.Success(data = body)
+                if (newsResponse == null) {
+                    newsResponse = body
+                } else {
+                    val oldArticle = newsResponse?.articles
+                    val newArticles = body?.articles
+                    if (newArticles != null) {
+                        oldArticle?.addAll(newArticles)
+                    }
+                }
+                Resources.Success(data = newsResponse ?: body)
             } else {
                 Resources.Error(data = body, message = response.message())
             }
