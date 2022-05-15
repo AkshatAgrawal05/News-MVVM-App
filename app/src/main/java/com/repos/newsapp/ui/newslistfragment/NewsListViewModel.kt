@@ -22,6 +22,7 @@ class NewsListViewModel @Inject constructor(
         viewModelScope.launch {
             articlesList.postValue(Resources.Loading(true))
             val response = repository.getTopHeadlineNews(pageNum = newsPage)
+            newsPage++
             articlesList.postValue(response)
 //            articlesList.postValue(Resources.Loading(false))
         }
