@@ -47,10 +47,26 @@ class NewsListAdapter : RecyclerView.Adapter<NewsListAdapter.ItemViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
-        holder.bind(differ.currentList[position])
+        val articles = differ.currentList[position]
+        holder.apply {
+            bind(articles)
+            itemView.apply {
+                setOnClickListener {
+                    onItemClickListener?.let {
+                        it(articles)
+                    }
+                }
+            }
+        }
     }
 
     override fun getItemCount(): Int {
         return differ.currentList.size
+    }
+
+    private var onItemClickListener: ((Articles?) -> Unit)? = null
+
+    fun setOnClickListener(listener: (Articles?) -> Unit) {
+        onItemClickListener = listener
     }
 }

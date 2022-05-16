@@ -8,8 +8,8 @@ import kotlinx.android.parcel.Parcelize
 data class Source(
 
     @field:SerializedName("id")
-    val id: String,
+    val id: String? = null,
 
     @field:SerializedName("name")
-    val name: String
+    val name: String? = null
 ) : Parcelable

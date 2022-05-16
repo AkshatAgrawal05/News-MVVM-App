@@ -8,10 +8,12 @@ import android.widget.AbsListView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.BaseTransientBottomBar.LENGTH_LONG
 import com.google.android.material.snackbar.Snackbar
+import com.repos.newsapp.R
 import com.repos.newsapp.databinding.FragmentNewsListBinding
 import com.repos.newsapp.domain.repository.NewsRepository
 import com.repos.newsapp.util.Resources
@@ -44,8 +46,22 @@ class NewsListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setUpRecyclerView()
+        setUpClickListner()
         viewModel.getNewsList()
         setUpObserver()
+    }
+
+    private fun setUpClickListner() {
+        newsAdapter.setOnClickListener { article ->
+            val bundle = Bundle().apply {
+                putParcelable("article", article)
+            }
+
+            findNavController().navigate(
+                R.id.action_newsListFragment_to_newsDetailsFragment,
+                bundle
+            )
+        }
     }
 
     private fun setUpRecyclerView() {
