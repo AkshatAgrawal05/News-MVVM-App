@@ -35,5 +35,7 @@ data class Articles(
     val url: String? = null,
 
     @field:SerializedName("content")
-    val content: String? = null
+    val content: String? = null,
+
+    var isSaved: Boolean = false
 ) : Parcelable

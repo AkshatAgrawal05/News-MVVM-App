@@ -17,6 +17,16 @@ class ImageAdapter {
                     .transform(BlurTransformation())
                     .into(view)
         }
+
+        @JvmStatic
+        @BindingAdapter("loadImageForDesc")
+        fun loadImageForDesc(view: ImageView, url: String?) {
+            if (url != null)
+                Glide.with(view.context)
+                    .load(url)
+                    .into(view)
+        }
+
     }
 
 }
